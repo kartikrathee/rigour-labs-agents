@@ -13,6 +13,7 @@ async def vad_agent(params: agents.Job.AgentParams):
 
         async def vad_result_loop(queue: AsyncIterator[VAD.Event]):
             async for event in queue:
+                print(f"VAD Event: {event.type}")
                 if event.type == "voice_started":
                     print("VAD - Voice Started")
                 elif event.type == "voice_finished":
