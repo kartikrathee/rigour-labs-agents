@@ -54,7 +54,7 @@ setuptools.setup(
     install_requires=[
         "livekit",
         "numpy >= 1.24.0",
-        "elevenlabs >= 0.2.26",
+        "elevenlabs >= 0.2.24",
         "websockets >= 11.0.0",
         "aiohttp >= 3.8.5"
     ],
