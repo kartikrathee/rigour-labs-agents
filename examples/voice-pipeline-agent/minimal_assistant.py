@@ -10,6 +10,7 @@ from livekit.agents import (
     WorkerOptions,
     cli,
     llm,
+    metrics,
 )
 from livekit.agents.pipeline import VoicePipelineAgent
 from livekit.plugins import deepgram, openai, silero
@@ -52,6 +53,19 @@ async def entrypoint(ctx: JobContext):
     )
 
     agent.start(ctx.room, participant)
+
+    usage_collector = metrics.UsageCollector()
+
+    @agent.on("metrics_collected")
+    def _on_metrics_collected(metrics: metrics.AgentMetrics):
+        metrics.log_metrics(metrics)
+        usage_collector.add_usage(metrics)
+
+    async def log_usage():
+        summary = usage_collector.get_summary()
+        logger.info(f"Usage: ${summary}")
+
+    ctx.add_shutdown_callback(log_usage)
 
     # listen to incoming chat messages, only required if you'd like the agent to
     # answer incoming messages from Chat
