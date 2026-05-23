@@ -47,11 +47,16 @@ setuptools.setup(
     license="Apache-2.0",
     packages=setuptools.find_namespace_packages(include=["livekit.*"]),
     python_requires=">=3.9.0",
+<<<<<<<< HEAD:livekit-plugins/livekit-plugins-groq/setup.py
     install_requires=[
         "livekit-agents>=0.12.16,<1.0.0",
         "livekit-plugins-openai>=0.11.2,<1.0.0",
     ],
     package_data={"livekit.plugins.groq": ["py.typed"]},
+========
+    install_requires=["livekit-agents>=0.12.16,<1.0.0", "numpy>=1.26"],
+    package_data={"livekit.plugins.deepgram": ["py.typed"]},
+>>>>>>>> main:livekit-plugins/livekit-plugins-deepgram/setup.py
     project_urls={
         "Documentation": "https://docs.livekit.io",
         "Website": "https://livekit.io/",
